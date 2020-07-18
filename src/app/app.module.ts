@@ -7,6 +7,7 @@ import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContainersComponent } from './containers/containers.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, ContainersComponent],
@@ -14,8 +15,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserModule,
     AppRoutingModule,
     ClarityModule,
-    BrowserAnimationsModule,,
-    FlexLayoutModule
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

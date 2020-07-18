@@ -1,3 +1,97 @@
-<div fxFlex fxFlexFill fxLayout="row" style="position: relative">
-aa
+<div fxFlex fxFlexFill fxLayout="column" style="position: relative;">
+  <div class="pageCard">
+    <div class="btn-group btn-outline-primary btn-sm">
+      <button class="btn" (click)="LoadContainers()">
+        Refresh <clr-icon shape="refresh" size="12"></clr-icon>
+      </button>
+
+      <button class="btn">
+        Start<clr-icon shape="plus"></clr-icon>
+      </button>
+
+      <button class="btn">
+        Stop<clr-icon shape="plus"></clr-icon>
+      </button>
+
+      <button class="btn">
+        Remove<clr-icon shape="plus"></clr-icon>
+      </button>
+
+      <button class="btn">
+        Restart<clr-icon shape="plus"></clr-icon>
+      </button>
+    </div>
+
+
+  </div>
+  <div fxFlex fxFlexFill fxLayout="column" class="pageCard">
+    <clr-datagrid
+      #dataGrid
+      [(clrDgSelected)]="SelectedItems"
+      (clrDgRefresh)="LoadContainers()"
+      style="height: 100% !important;"
+      class="datagrid"
+    >
+      <clr-dg-column style="width: 75px;"></clr-dg-column>
+      <clr-dg-column>ID</clr-dg-column>
+      <clr-dg-column>Name</clr-dg-column>
+      <clr-dg-column>Image</clr-dg-column>
+      <clr-dg-column>Ports</clr-dg-column>
+      <clr-dg-column>Status</clr-dg-column>
+      <clr-dg-column>Created</clr-dg-column>
+
+      <clr-dg-row
+        *clrDgItems="let container of Containers"
+        [clrDgItem]="container"
+      >
+        <clr-dg-action-overflow>
+          <button class="action-item">
+            <i class="fa fa-info-circle md-18"></i>
+            Detail
+          </button>
+          <button class="action-item">
+            <i class="fa fa-info-circle md-18"></i>
+            Start
+          </button>
+          <button class="action-item">
+            <i class="fa fa-info-circle md-18"></i>
+            Stop
+          </button>
+        </clr-dg-action-overflow>
+        <clr-dg-cell style="padding: 8px;">
+          <span
+            *ngIf="container.state == 'running'"
+            class="label label-success"
+            >{{ container.state }}</span
+          >
+          <span
+            *ngIf="container.state == 'exited'"
+            class="label label-warning"
+            >{{ container.state }}</span
+          >
+        </clr-dg-cell>
+        <clr-dg-cell>{{ container.id | slice: 0:10 }}</clr-dg-cell>
+        <clr-dg-cell>{{ container.names[0] | slice: 1:100 }}</clr-dg-cell>
+        <clr-dg-cell>
+          <a [attr.href]="GetImageUir(container.image)" target="_blank">
+            {{ container.image }}
+          </a></clr-dg-cell
+        >
+        <clr-dg-cell>
+          <ng-template ngFor let-port [ngForOf]="container.ports">
+            <clr-icon shape="link"></clr-icon>
+            <a [attr.href]="GetUri(port)" target="_blank">
+              {{ port.privatePort }}:{{ port.publicPort }}
+            </a>
+          </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{ container.status }}</clr-dg-cell>
+        <clr-dg-cell>{{
+          container.created | date: "yyyy-MM-dd hh:mm:ss"
+        }}</clr-dg-cell>
+      </clr-dg-row>
+
+      <clr-dg-footer>Containers</clr-dg-footer>
+    </clr-datagrid>
+  </div>
 </div>
