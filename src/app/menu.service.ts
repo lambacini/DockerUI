@@ -35,11 +35,22 @@ export class MenuService {
       Name: 'Containers',
       Type: 'link',
       Icon: 'view-cards'
-    });
-    this.MENU.push({
+    }, {
       Caption: 'Volumes',
       Link: '/Volumes',
       Name: 'Volumes',
+      Type: 'link',
+      Icon: 'nvme'
+    }, {
+      Caption: 'Networks',
+      Link: '/Networks',
+      Name: 'Networks',
+      Type: 'link',
+      Icon: 'nvme'
+    }, {
+      Caption: 'Images',
+      Link: '/Images',
+      Name: 'Images',
       Type: 'link',
       Icon: 'nvme'
     });

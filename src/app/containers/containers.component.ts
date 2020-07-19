@@ -11,22 +11,62 @@ export class ContainersComponent implements OnInit {
   public Containers: any[];
   public SelectedItems: any[];
   public SelectedItem: any;
+  public IsBusy: boolean = false;
 
   constructor(
     private context: AppContext,
     private containerService: ContainerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.LoadContainers();
   }
 
   LoadContainers(): void {
+    this.IsBusy = true;
     this.containerService.Get().subscribe((result) => {
       if (result.success) {
         this.Containers = result.data;
       }
+
+      this.IsBusy = false;
     });
+  }
+
+  StartContainer(containerid: string): void {
+    this.IsBusy = true;
+    this.containerService
+      .StartContainer(containerid)
+      .subscribe(result => {
+        if (result.success) {
+          this.LoadContainers();
+        }
+
+        this.IsBusy = false;
+      });
+  }
+
+  StopContainer(containerid: string): void {
+    this.IsBusy = true;
+    this.containerService
+      .StopContainer(containerid)
+      .subscribe(result => {
+        if (result.success) {
+          this.LoadContainers();
+        }
+
+        this.IsBusy = false;
+      });
+  }
+
+  RemoveContainer(containerid: string): void {
+    this.containerService
+      .RemoveContainer(containerid)
+      .subscribe(result => {
+        if (result.success) {
+          this.LoadContainers();
+        }
+      });
   }
 
   GetUri(port: any) {

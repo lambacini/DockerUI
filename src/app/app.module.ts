@@ -8,9 +8,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContainersComponent } from './containers/containers.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
+import { VolumesComponent } from './volumes/volumes.component';
+import { NetworksComponent } from './networks/networks.component';
+import { ImagesComponent } from './images/images.component';
 
 @NgModule({
-  declarations: [AppComponent, ContainersComponent],
+  declarations: [AppComponent, ContainersComponent, VolumesComponent, NetworksComponent, ImagesComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -27,6 +27,7 @@
   <div fxFlex fxFlexFill fxLayout="column" class="pageCard">
     <clr-datagrid
       #dataGrid
+      [clrDgLoading]="IsBusy"
       [(clrDgSelected)]="SelectedItems"
       (clrDgRefresh)="LoadContainers()"
       style="height: 100% !important;"
@@ -49,13 +50,17 @@
             <i class="fa fa-info-circle md-18"></i>
             Detail
           </button>
-          <button class="action-item">
+          <button class="action-item" (click)="StartContainer(container.id)">
             <i class="fa fa-info-circle md-18"></i>
             Start
           </button>
-          <button class="action-item">
+          <button class="action-item" (click)="StopContainer(container.id)">
             <i class="fa fa-info-circle md-18"></i>
             Stop
+          </button>
+          <button class="action-item" (click)="RemoveContainer(container.id)">
+            <i class="fa fa-info-circle md-18"></i>
+            Remove
           </button>
         </clr-dg-action-overflow>
         <clr-dg-cell style="padding: 8px;">
