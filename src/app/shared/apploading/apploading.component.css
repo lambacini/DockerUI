@@ -1,0 +1,30 @@
+.loadingContainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 9999;
+  color: black;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.tpBackground {
+  background-color: rgba(255, 255, 255, 0.62);
+}
+
+.fillBackground {
+  background-color: #ffffff7a;
+}
+
+.fillBackgroundWhite {
+  background-color: white;
+}
+
+.loadingText {
+  font-size: 14px;
+  color: #949494;
+  font-family: inherit;
+  font-weight: 300;
+}

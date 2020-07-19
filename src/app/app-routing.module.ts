@@ -4,34 +4,38 @@ import { ContainersComponent } from './containers/containers.component';
 import { VolumesComponent } from './volumes/volumes.component';
 import { NetworksComponent } from './networks/networks.component';
 import { ImagesComponent } from './images/images.component';
-
+import { ContainerlogsComponent } from './containerlogs/containerlogs.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/Home', pathMatch: 'full' },
   {
     path: 'Home',
-    component: ContainersComponent
+    component: ContainersComponent,
   },
   {
     path: 'Containers',
-    component: ContainersComponent
+    component: ContainersComponent,
+  },
+  {
+    path: 'Containers/:id',
+    component: ContainerlogsComponent,
   },
   {
     path: 'Volumes',
-    component: VolumesComponent
+    component: VolumesComponent,
   },
   {
     path: 'Networks',
-    component: NetworksComponent
+    component: NetworksComponent,
   },
   {
     path: 'Images',
-    component: ImagesComponent
+    component: ImagesComponent,
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

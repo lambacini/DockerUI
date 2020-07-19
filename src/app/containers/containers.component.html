@@ -5,24 +5,14 @@
         Refresh <clr-icon shape="refresh" size="12"></clr-icon>
       </button>
 
-      <button class="btn">
-        Start<clr-icon shape="plus"></clr-icon>
-      </button>
+      <button class="btn">Start<clr-icon shape="plus"></clr-icon></button>
 
-      <button class="btn">
-        Stop<clr-icon shape="plus"></clr-icon>
-      </button>
+      <button class="btn">Stop<clr-icon shape="plus"></clr-icon></button>
 
-      <button class="btn">
-        Remove<clr-icon shape="plus"></clr-icon>
-      </button>
+      <button class="btn">Remove<clr-icon shape="plus"></clr-icon></button>
 
-      <button class="btn">
-        Restart<clr-icon shape="plus"></clr-icon>
-      </button>
+      <button class="btn">Restart<clr-icon shape="plus"></clr-icon></button>
     </div>
-
-
   </div>
   <div fxFlex fxFlexFill fxLayout="column" class="pageCard">
     <clr-datagrid
@@ -46,9 +36,9 @@
         [clrDgItem]="container"
       >
         <clr-dg-action-overflow>
-          <button class="action-item">
+          <button class="action-item" (click)="ShowLogs(container.id)">
             <i class="fa fa-info-circle md-18"></i>
-            Detail
+            Logs
           </button>
           <button class="action-item" (click)="StartContainer(container.id)">
             <i class="fa fa-info-circle md-18"></i>
@@ -90,7 +80,7 @@
             </a>
           </ng-template>
         </clr-dg-cell>
-        <clr-dg-cell>{{ container.status }}</clr-dg-cell>
+        <clr-dg-cell class="wrapText">{{ container.status }}</clr-dg-cell>
         <clr-dg-cell>{{
           container.created | date: "yyyy-MM-dd hh:mm:ss"
         }}</clr-dg-cell>

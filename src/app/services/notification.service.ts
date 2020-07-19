@@ -25,11 +25,16 @@ export enum NotificationType {
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
     private subject = new Subject<Notification>();
+    private _appBusySubject: Subject<boolean> = new Subject<boolean>();
     private defaultId = 'default-alert';
 
 
     onAlert(id = this.defaultId): Observable<Notification> {
         return this.subject.asObservable().pipe(filter(x => x && x.id === id));
+    }
+
+    public AppBusyTracker(): Observable<boolean> {
+        return this._appBusySubject.asObservable();
     }
 
     success(message: string, options?: any) {
@@ -55,5 +60,13 @@ export class NotificationService {
 
     clear(id = this.defaultId) {
         this.subject.next(new Notification({ id }));
+    }
+
+    public ShowLoading(message: string = "") {
+        this._appBusySubject.next(true);
+    }
+
+    public HideLoading(): void {
+        this._appBusySubject.next(false);
     }
 }

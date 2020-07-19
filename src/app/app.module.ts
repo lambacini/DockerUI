@@ -11,9 +11,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { VolumesComponent } from './volumes/volumes.component';
 import { NetworksComponent } from './networks/networks.component';
 import { ImagesComponent } from './images/images.component';
+import { ApploadingComponent } from './shared/apploading/apploading.component';
+import { ContainerlogsComponent } from './containerlogs/containerlogs.component';
 
 @NgModule({
-  declarations: [AppComponent, ContainersComponent, VolumesComponent, NetworksComponent, ImagesComponent],
+  declarations: [AppComponent, ContainersComponent, VolumesComponent, NetworksComponent, ImagesComponent, ApploadingComponent, ContainerlogsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

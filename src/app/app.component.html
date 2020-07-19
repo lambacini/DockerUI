@@ -8,14 +8,18 @@
 
     <div class="header-actions">
       <clr-dropdown>
-        <button class="nav-text " clrDropdownTrigger aria-label="open user profile">
+        <button
+          class="nav-text"
+          clrDropdownTrigger
+          aria-label="open user profile"
+        >
           Admin <clr-icon shape="administrator"></clr-icon>
           <clr-icon shape="caret down"></clr-icon>
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-          <a href="javascript://" clrDropdownItem >Settings</a>
-          <a href="javascript://" clrDropdownItem >Change Password</a>
-          <a href="javascript://" clrDropdownItem >Logout</a>
+          <a href="javascript://" clrDropdownItem>Settings</a>
+          <a href="javascript://" clrDropdownItem>Change Password</a>
+          <a href="javascript://" clrDropdownItem>Logout</a>
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>
@@ -24,25 +28,56 @@
     <main class="content-area" fxFlex fxLayout="column">
       <router-outlet></router-outlet>
     </main>
-    <clr-vertical-nav [clr-nav-level]="1" [clrVerticalNavCollapsible]="true" [clrVerticalNavCollapsed]="true">
+    <clr-vertical-nav
+      [clr-nav-level]="1"
+      [clrVerticalNavCollapsible]="true"
+      [clrVerticalNavCollapsed]="true"
+    >
       <ng-container *ngFor="let menu of Menu">
-        <a IsForm=true clrVerticalNavLink *ngIf="menu.Type != 'toggle'"
-          [routerLink]="[menu.Link]" routerLinkActive="active" aria-hidden="true">
-          <clr-icon class="is-solid" clrVerticalNavIcon [attr.shape]="menu.Icon"></clr-icon>
-          {{menu.Caption}}
+        <a
+          IsForm="true"
+          clrVerticalNavLink
+          *ngIf="menu.Type != 'toggle'"
+          [routerLink]="[menu.Link]"
+          routerLinkActive="active"
+          aria-hidden="true"
+        >
+          <clr-icon
+            class="is-solid"
+            clrVerticalNavIcon
+            [attr.shape]="menu.Icon"
+          ></clr-icon>
+          {{ menu.Caption }}
         </a>
-        <clr-vertical-nav-group routerLinkActive="active" *ngIf="menu.Type== 'toggle'">
-          <clr-icon class="is-solid" [attr.shape]="menu.Icon" clrVerticalNavIcon></clr-icon>
+        <clr-vertical-nav-group
+          routerLinkActive="active"
+          *ngIf="menu.Type == 'toggle'"
+        >
+          <clr-icon
+            class="is-solid"
+            [attr.shape]="menu.Icon"
+            clrVerticalNavIcon
+          ></clr-icon>
           {{ menu.Caption }}
           <clr-vertical-nav-group-children>
-            <a IsForm=true *ngFor='let sub of menu.Children' clrVerticalNavLink
-              [routerLink]="[sub.Link]" routerLinkActive="active">
-              <clr-icon class="is-solid" clrVerticalNavIcon [attr.shape]="sub.Icon"></clr-icon>
-              {{sub.Caption}}
+            <a
+              IsForm="true"
+              *ngFor="let sub of menu.Children"
+              clrVerticalNavLink
+              [routerLink]="[sub.Link]"
+              routerLinkActive="active"
+            >
+              <clr-icon
+                class="is-solid"
+                clrVerticalNavIcon
+                [attr.shape]="sub.Icon"
+              ></clr-icon>
+              {{ sub.Caption }}
             </a>
           </clr-vertical-nav-group-children>
         </clr-vertical-nav-group>
       </ng-container>
     </clr-vertical-nav>
   </div>
+  <app-apploading [Loading]="IsAppBusy" [LoaderMessage]="AppBusyMessage"></app-apploading>
 </clr-main-container>

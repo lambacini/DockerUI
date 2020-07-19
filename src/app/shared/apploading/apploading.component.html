@@ -1,0 +1,16 @@
+<div
+  *ngIf="isLoading"
+  fxFlex
+  fxFlexFill
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  [ngClass]="{ fillBackgroundWhite: WhiteBackground }"
+  class="noselect loadingContainer fillBackground"
+>
+  <span class="spinner spinner-md">
+    Loading...
+  </span>
+  <span>
+    {{ LoaderMessage }}
+  </span>
+</div>

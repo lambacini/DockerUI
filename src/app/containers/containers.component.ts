@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AppContext } from '../appContext';
 import { ContainerService } from '../services/container.service';
+import swal from 'sweetalert2';
+import { NotificationService } from '../services/notification.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-containers',
@@ -15,58 +18,60 @@ export class ContainersComponent implements OnInit {
 
   constructor(
     private context: AppContext,
-    private containerService: ContainerService
-  ) { }
+    private containerService: ContainerService,
+    private notification: NotificationService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-    this.LoadContainers();
-  }
+  ngOnInit(): void {}
 
   LoadContainers(): void {
     this.IsBusy = true;
-    this.containerService.Get().subscribe((result) => {
-      if (result.success) {
-        this.Containers = result.data;
+    this.containerService.Get().subscribe(
+      (result) => {
+        if (result.success) {
+          this.Containers = result.data;
+        }
+        this.IsBusy = false;
+      },
+      (err) => {
+        this.IsBusy = false;
+        this.notification.warn('Api service not available !');
       }
-
-      this.IsBusy = false;
-    });
+    );
   }
 
   StartContainer(containerid: string): void {
-    this.IsBusy = true;
-    this.containerService
-      .StartContainer(containerid)
-      .subscribe(result => {
-        if (result.success) {
-          this.LoadContainers();
-        }
+    this.notification.ShowLoading();
+    this.containerService.StartContainer(containerid).subscribe((result) => {
+      if (result.success) {
+        this.LoadContainers();
+      }
 
-        this.IsBusy = false;
-      });
+      this.notification.HideLoading();
+    });
   }
 
   StopContainer(containerid: string): void {
-    this.IsBusy = true;
-    this.containerService
-      .StopContainer(containerid)
-      .subscribe(result => {
-        if (result.success) {
-          this.LoadContainers();
-        }
-
-        this.IsBusy = false;
-      });
+    this.notification.ShowLoading();
+    this.containerService.StopContainer(containerid).subscribe((result) => {
+      if (result.success) {
+        this.LoadContainers();
+      }
+      this.notification.HideLoading();
+    });
   }
 
   RemoveContainer(containerid: string): void {
-    this.containerService
-      .RemoveContainer(containerid)
-      .subscribe(result => {
-        if (result.success) {
-          this.LoadContainers();
-        }
-      });
+    this.containerService.RemoveContainer(containerid).subscribe((result) => {
+      if (result.success) {
+        this.LoadContainers();
+      }
+    });
+  }
+
+  ShowLogs(containerid: string): void {
+    this.router.navigate(['/Containers/', containerid]);
   }
 
   GetUri(port: any) {
