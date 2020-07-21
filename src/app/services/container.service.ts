@@ -70,6 +70,19 @@ export class ContainerService extends ServiceBase<any> {
       });
   }
 
+  KillContainer(containerid: string): Observable<ApiResponse<any>> {
+    return this.http
+      .post(
+        this.context.ApiUrl(this.ApiSegment) +
+          '/Kill?containerid=' +
+          containerid,
+        {}
+      )
+      .pipe((result) => {
+        return result as Observable<ApiResponse<any>>;
+      });
+  }
+
   GetLogs(containerid: string): Observable<ApiResponse<any>> {
     return this.http
       .get(this.context.ApiUrl(this.ApiSegment) + '/Logs/' + containerid, {})

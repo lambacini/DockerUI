@@ -13,14 +13,15 @@ import { NetworksComponent } from './networks/networks.component';
 import { ImagesComponent } from './images/images.component';
 import { ApploadingComponent } from './shared/apploading/apploading.component';
 import { ContainerlogsComponent } from './containerlogs/containerlogs.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, ContainersComponent, VolumesComponent, NetworksComponent, ImagesComponent, ApploadingComponent, ContainerlogsComponent],
+  declarations: [AppComponent, ContainersComponent, VolumesComponent, NetworksComponent, ImagesComponent, ApploadingComponent, ContainerlogsComponent, HomeComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    ClarityModule,
     BrowserAnimationsModule,
+    ClarityModule,
+    AppRoutingModule,
     FlexLayoutModule,
     HttpClientModule
   ],

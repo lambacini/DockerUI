@@ -1,1 +1,33 @@
-<p>networks works!</p>
+<div fxFlex fxFlexFill fxLayout="column" style="position: relative;">
+  <div class="pageCard">
+    <div class="btn-group btn-outline-primary btn-sm">
+      <button class="btn" (click)="LoadImages()">
+        Refresh <clr-icon shape="refresh" size="12"></clr-icon>
+      </button>
+    </div>
+  </div>
+  <div
+    fxFlex
+    fxFlexFill
+    fxLayout="column"
+    class="pageCard"
+    style="height: 96% !important;"
+  >
+    <clr-datagrid
+      #dataGrid
+      (clrDgSelectedChange)="selectionChanged($event)"
+      [clrDgRowSelection]="true"
+      [(clrDgSelected)]="SelectedItems"
+      style="height: 100% !important;"
+      class="datagrid"
+    >
+      <clr-dg-column style="width: 240px;">ID</clr-dg-column>
+
+      <clr-dg-row *clrDgItems="let image of Images" [clrDgItem]="image">
+        <clr-dg-cell class="wrapText">{{ image.id }}</clr-dg-cell>
+      </clr-dg-row>
+
+      <clr-dg-footer>Containers</clr-dg-footer>
+    </clr-datagrid>
+  </div>
+</div>

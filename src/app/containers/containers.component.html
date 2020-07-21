@@ -1,18 +1,28 @@
 <div fxFlex fxFlexFill fxLayout="column" style="position: relative;">
   <div class="pageCard">
-    <div class="btn-group btn-outline-primary btn-sm">
-      <button class="btn" (click)="LoadContainers()">
-        Refresh <clr-icon shape="refresh" size="12"></clr-icon>
-      </button>
+    <button
+      style="margin-right: 2px;"
+      class="btn btn-sm"
+      (click)="LoadContainers()"
+    >
+      Refresh <clr-icon shape="refresh" size="12"></clr-icon>
+    </button>
 
-      <button class="btn">Start<clr-icon shape="plus"></clr-icon></button>
-
-      <button class="btn">Stop<clr-icon shape="plus"></clr-icon></button>
-
-      <button class="btn">Remove<clr-icon shape="plus"></clr-icon></button>
-
-      <button class="btn">Restart<clr-icon shape="plus"></clr-icon></button>
-    </div>
+    <button style="margin-right: 2px;" class="btn btn-success btn-sm">
+      Start
+    </button>
+    <button style="margin-right: 2px;" class="btn btn-primary btn-sm">
+      Stop
+    </button>
+    <button style="margin-right: 2px;" class="btn btn-primary btn-sm">
+      Restart
+    </button>
+    <button style="margin-right: 2px;" class="btn btn-danger btn-sm">
+      Kill
+    </button>
+    <button style="margin-right: 2px;" class="btn btn-danger btn-sm">
+      Remove
+    </button>
   </div>
   <div fxFlex fxFlexFill fxLayout="column" class="pageCard">
     <clr-datagrid
@@ -39,6 +49,14 @@
           <button class="action-item" (click)="ShowLogs(container.id)">
             <i class="fa fa-info-circle md-18"></i>
             Logs
+          </button>
+          <button class="action-item" (click)="KillContainer(container.id)">
+            <i class="fa fa-info-circle md-18"></i>
+            Kill
+          </button>
+          <button class="action-item" (click)="ReStartContainer(container.id)">
+            <i class="fa fa-info-circle md-18"></i>
+            Restart
           </button>
           <button class="action-item" (click)="StartContainer(container.id)">
             <i class="fa fa-info-circle md-18"></i>

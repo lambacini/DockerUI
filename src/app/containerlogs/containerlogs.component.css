@@ -1,0 +1,8 @@
+.row-align{
+    text-align: left;
+}
+
+.table{
+    max-height: 500px !important;
+    overflow-y: scroll;
+}

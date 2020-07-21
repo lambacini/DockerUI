@@ -1,3 +1,25 @@
-<textarea style="width: 100%;" name="description" required>
-{{Logs}}
-</textarea>
+<div fxFlex fxFlexFill fxLayout="column" style="position: relative;">
+  <div fxLayout="row" class="pageCard">
+    <clr-toggle-container>
+      <clr-toggle-wrapper>
+        <input type="checkbox" clrToggle value="option1" name="options" />
+        <label>Auto Refresh</label>
+      </clr-toggle-wrapper>
+    </clr-toggle-container>
+  </div>
+  <div fxFlex fxFlexFill fxLayout="column" class="pageCard">
+    <table fxFlex fxFlexFill  style="position: relative;"class="table table-compact">
+      <thead>
+        <tr>
+          <th>Log</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of Logs">
+          <td class="row-align">{{log}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

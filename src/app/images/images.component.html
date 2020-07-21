@@ -1,1 +1,49 @@
-<p>images works!</p>
+<div fxFlex fxFlexFill fxLayout="column" style="position: relative;">
+  <div class="pageCard">
+    <div class="btn-group btn-outline-primary btn-sm">
+      <button class="btn" (click)="LoadImages()">
+        Refresh <clr-icon shape="refresh" size="12"></clr-icon>
+      </button>
+    </div>
+  </div>
+  <div
+    fxFlex
+    fxFlexFill
+    fxLayout="column"
+    class="pageCard"
+    style="height: 96% !important;"
+  >
+    <clr-datagrid
+      #dataGrid
+      [clrDgLoading]="IsBusy"
+      [(clrDgSelected)]="SelectedItems"
+      (clrDgRefresh)="LoadImages()"
+      style="height: 100% !important;"
+      class="datagrid"
+    >
+      <clr-dg-column style="width: 240px;">ID</clr-dg-column>
+      <clr-dg-column>Tag</clr-dg-column>
+      <clr-dg-column>Size</clr-dg-column>
+      <clr-dg-column>Created</clr-dg-column>
+
+      <clr-dg-row *clrDgItems="let image of Images" [clrDgItem]="image">
+        <clr-dg-action-overflow>
+          <button class="action-item">
+            <i class="fa fa-info-circle md-18"></i>
+            Logs
+          </button>
+        </clr-dg-action-overflow>
+        <clr-dg-cell class="wrapText">{{ image.id }}</clr-dg-cell>
+        <clr-dg-cell class="wrapText">
+          <ng-template ngFor let-tag [ngForOf]="image.repoTags">
+            <span class="label label-blue">{{ tag }}</span>
+          </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell class="wrapText">{{ (image.size /1024/1024) | number:'1.0-2' }} MB</clr-dg-cell>
+        <clr-dg-cell class="wrapText">{{ image.created | date:'yyyy/MM/dd'}} </clr-dg-cell>
+      </clr-dg-row>
+
+      <clr-dg-footer>Containers</clr-dg-footer>
+    </clr-datagrid>
+  </div>
+</div>

@@ -5,12 +5,13 @@ import { VolumesComponent } from './volumes/volumes.component';
 import { NetworksComponent } from './networks/networks.component';
 import { ImagesComponent } from './images/images.component';
 import { ContainerlogsComponent } from './containerlogs/containerlogs.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/Home', pathMatch: 'full' },
   {
     path: 'Home',
-    component: ContainersComponent,
+    component: HomeComponent,
   },
   {
     path: 'Containers',

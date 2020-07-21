@@ -18,6 +18,11 @@ body {
   border-right: 1px solid #bdbcbc;
 }
 
+.main-container .content-container .content-area{
+  padding:0;
+  margin:5px;
+}
+
 .pageCard {
   border-radius: 0.125rem;
   border: 1px solid #d7d7d7;
@@ -31,7 +36,6 @@ body {
 
 .datagrid {
   margin: 0px;
-  border: none;
 }
 
 

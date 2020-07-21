@@ -41,11 +41,33 @@ export class ContainersComponent implements OnInit {
     );
   }
 
+  ReStartContainer(containerid: string): void {
+    this.notification.ShowLoading();
+    this.containerService.StopContainer(containerid).subscribe((result) => {
+      if (result.success) {
+        this.containerService
+          .StartContainer(containerid)
+          .subscribe((result2) => {
+            this.notification.success('Success');
+          });
+      } else {
+        this.notification.warn('Container ReStart Failed');
+        this.notification.warn(result.message);
+      }
+
+      this.notification.HideLoading();
+    });
+  }
+
   StartContainer(containerid: string): void {
     this.notification.ShowLoading();
     this.containerService.StartContainer(containerid).subscribe((result) => {
       if (result.success) {
+        this.notification.success('Container Start Success');
         this.LoadContainers();
+      } else {
+        this.notification.warn('Container Start Failed');
+        this.notification.warn(result.message);
       }
 
       this.notification.HideLoading();
@@ -56,6 +78,7 @@ export class ContainersComponent implements OnInit {
     this.notification.ShowLoading();
     this.containerService.StopContainer(containerid).subscribe((result) => {
       if (result.success) {
+        this.notification.success('Container Stop Success');
         this.LoadContainers();
       }
       this.notification.HideLoading();
@@ -63,10 +86,28 @@ export class ContainersComponent implements OnInit {
   }
 
   RemoveContainer(containerid: string): void {
+    this.notification.ShowLoading();
+
     this.containerService.RemoveContainer(containerid).subscribe((result) => {
       if (result.success) {
+        this.notification.success('Container Remove Success');
         this.LoadContainers();
       }
+
+      this.notification.HideLoading();
+    });
+  }
+
+  KillContainer(containerid: string): void {
+    this.notification.ShowLoading();
+
+    this.containerService.KillContainer(containerid).subscribe((result) => {
+      if (result.success) {
+        this.notification.success('Container Kill Success');
+        this.LoadContainers();
+      }
+
+      this.notification.HideLoading();
     });
   }
 
