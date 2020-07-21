@@ -1,5 +1,10 @@
 <div fxFlex fxFlexFill fxLayout="column" style="position: relative;">
   <div class="pageCard">
+    <div *ngIf="IsBusy" class="card-footer">
+      <div aria-hidden="true" style="padding: 5px;" class="progress loop">
+        
+      </div>
+    </div>
     <button
       style="margin-right: 2px;"
       class="btn btn-sm"
@@ -7,20 +12,44 @@
     >
       Refresh <clr-icon shape="refresh" size="12"></clr-icon>
     </button>
-
-    <button style="margin-right: 2px;" class="btn btn-success btn-sm">
+    <button
+      [disabled]="!IsButtonEnabled('start')"
+      (click)="StartContainer()"
+      style="margin-right: 2px;"
+      class="btn btn-success btn-sm"
+    >
       Start
     </button>
-    <button style="margin-right: 2px;" class="btn btn-primary btn-sm">
+    <button
+      [disabled]="!IsButtonEnabled('stop')"
+      (click)="StopContainer()"
+      style="margin-right: 2px;"
+      class="btn btn-primary btn-sm"
+    >
       Stop
     </button>
-    <button style="margin-right: 2px;" class="btn btn-primary btn-sm">
+    <button
+      (click)="ReStartContainer()"
+      [disabled]="!IsButtonEnabled('restart')"
+      style="margin-right: 2px;"
+      class="btn btn-primary btn-sm"
+    >
       Restart
     </button>
-    <button style="margin-right: 2px;" class="btn btn-danger btn-sm">
+    <button
+      (click)="KillContainer()"
+      [disabled]="!IsButtonEnabled('kill')"
+      style="margin-right: 2px;"
+      class="btn btn-danger btn-sm"
+    >
       Kill
     </button>
-    <button style="margin-right: 2px;" class="btn btn-danger btn-sm">
+    <button
+      (click)="RemoveContainer()"
+      [disabled]="SelectedItems.length == 0"
+      style="margin-right: 2px;"
+      class="btn btn-danger btn-sm"
+    >
       Remove
     </button>
   </div>
@@ -45,32 +74,6 @@
         *clrDgItems="let container of Containers"
         [clrDgItem]="container"
       >
-        <clr-dg-action-overflow>
-          <button class="action-item" (click)="ShowLogs(container.id)">
-            <i class="fa fa-info-circle md-18"></i>
-            Logs
-          </button>
-          <button class="action-item" (click)="KillContainer(container.id)">
-            <i class="fa fa-info-circle md-18"></i>
-            Kill
-          </button>
-          <button class="action-item" (click)="ReStartContainer(container.id)">
-            <i class="fa fa-info-circle md-18"></i>
-            Restart
-          </button>
-          <button class="action-item" (click)="StartContainer(container.id)">
-            <i class="fa fa-info-circle md-18"></i>
-            Start
-          </button>
-          <button class="action-item" (click)="StopContainer(container.id)">
-            <i class="fa fa-info-circle md-18"></i>
-            Stop
-          </button>
-          <button class="action-item" (click)="RemoveContainer(container.id)">
-            <i class="fa fa-info-circle md-18"></i>
-            Remove
-          </button>
-        </clr-dg-action-overflow>
         <clr-dg-cell style="padding: 8px;">
           <span
             *ngIf="container.state == 'running'"
@@ -85,12 +88,12 @@
         </clr-dg-cell>
         <clr-dg-cell>{{ container.id | slice: 0:10 }}</clr-dg-cell>
         <clr-dg-cell>{{ container.names[0] | slice: 1:100 }}</clr-dg-cell>
-        <clr-dg-cell>
+        <clr-dg-cell class="wrapText">
           <a [attr.href]="GetImageUir(container.image)" target="_blank">
             {{ container.image }}
           </a></clr-dg-cell
         >
-        <clr-dg-cell>
+        <clr-dg-cell class="wrapText">
           <ng-template ngFor let-port [ngForOf]="container.ports">
             <clr-icon shape="link"></clr-icon>
             <a [attr.href]="GetUri(port)" target="_blank">
@@ -99,7 +102,7 @@
           </ng-template>
         </clr-dg-cell>
         <clr-dg-cell class="wrapText">{{ container.status }}</clr-dg-cell>
-        <clr-dg-cell>{{
+        <clr-dg-cell class="wrapText">{{
           container.created | date: "yyyy-MM-dd hh:mm:ss"
         }}</clr-dg-cell>
       </clr-dg-row>

@@ -24,13 +24,16 @@
               "node_modules/@clr/icons/clr-icons.min.css",
               "node_modules/@clr/ui/clr-ui.min.css",
               "node_modules/sweetalert2/dist/sweetalert2.min.css",
+              "node_modules/noty/lib/noty.css",
+              "node_modules/noty/lib/themes/metroui.css",
               "src/styles.css"
             ],
             "scripts": [
               "node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js",
               "node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js",
               "node_modules/sweetalert2/dist/sweetalert2.min.js",
-              "node_modules/@clr/icons/clr-icons.min.js"
+              "node_modules/@clr/icons/clr-icons.min.js",
+              "node_modules/noty/lib/noty.min.js"
             ]
           },
           "configurations": {

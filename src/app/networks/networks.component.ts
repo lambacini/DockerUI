@@ -13,7 +13,7 @@ import { ImageService } from '../services/image.service';
 })
 export class NetworksComponent implements OnInit {
   public Images: any[];
-  public SelectedItems: any;
+  public SelectedItems: any[] = [];
   public SelectedItem: any;
   public IsBusy: boolean = false;
 

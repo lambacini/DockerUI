@@ -3,7 +3,8 @@ import { AppContext } from '../appContext';
 import { ContainerService } from '../services/container.service';
 import swal from 'sweetalert2';
 import { NotificationService } from '../services/notification.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-containers',
@@ -11,8 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./containers.component.css'],
 })
 export class ContainersComponent implements OnInit {
-  public Containers: any[];
-  public SelectedItems: any[];
+  public Containers: any[] = [];
+  public SelectedItems: any[] = [];
   public SelectedItem: any;
   public IsBusy: boolean = false;
 
@@ -41,74 +42,112 @@ export class ContainersComponent implements OnInit {
     );
   }
 
-  ReStartContainer(containerid: string): void {
+  ReStartContainer(): void {
     this.notification.ShowLoading();
-    this.containerService.StopContainer(containerid).subscribe((result) => {
-      if (result.success) {
-        this.containerService
-          .StartContainer(containerid)
-          .subscribe((result2) => {
-            this.notification.success('Success');
+
+    var ops = forkJoin(
+      ...this.SelectedItems.map((container) =>
+        this.containerService.StopContainer(container.id)
+      )
+    );
+
+    ops.subscribe((result) => {
+      var ops2 = forkJoin(
+        ...this.SelectedItems.map((container) =>
+          this.containerService.StartContainer(container.id)
+        )
+      );
+
+      ops2.subscribe((resultStart) => {
+        this.notification.success('Success');
+        this.notification.HideLoading();
+        this.LoadContainers();
+      });
+    });
+  }
+
+  StartContainer(): void {
+    this.IsBusy = true;
+    var ops = forkJoin(
+      ...this.SelectedItems.map((container) =>
+        this.containerService.StartContainer(container.id)
+      )
+    );
+
+    ops.subscribe((result) => {
+      result.forEach((item) => {
+        this.notification.success(item.message);
+      });
+      this.IsBusy = true;
+      this.LoadContainers();
+    });
+  }
+
+  StopContainer(): void {
+    this.IsBusy = true;
+
+    var ops = forkJoin(
+      ...this.SelectedItems.map((container) =>
+        this.containerService.StopContainer(container.id)
+      )
+    );
+
+    ops.subscribe((result) => {
+      result.forEach((item) => {
+        this.notification.success(item.message);
+      });
+      this.LoadContainers();
+      this.IsBusy = true;
+    });
+  }
+
+  RemoveContainer(): void {
+    this.Confirm(
+      'Selected containers will be deleted !',
+      'are you sure ?'
+    ).then((answer) => {
+      if (answer) {
+        this.IsBusy = true;
+
+        var ops = forkJoin(
+          ...this.SelectedItems.map((container) =>
+            this.containerService.RemoveContainer(container.id)
+          )
+        );
+
+        ops.subscribe((result) => {
+          result.forEach((item) => {
+            this.notification.success(item.message);
           });
-      } else {
-        this.notification.warn('Container ReStart Failed');
-        this.notification.warn(result.message);
+          this.IsBusy = false;
+          this.LoadContainers();
+        });
       }
-
-      this.notification.HideLoading();
     });
   }
 
-  StartContainer(containerid: string): void {
-    this.notification.ShowLoading();
-    this.containerService.StartContainer(containerid).subscribe((result) => {
-      if (result.success) {
-        this.notification.success('Container Start Success');
-        this.LoadContainers();
-      } else {
-        this.notification.warn('Container Start Failed');
-        this.notification.warn(result.message);
+  KillContainer(): void {
+    this.Confirm('Selected containers will be killed !', 'are you sure ?').then(
+      (answer) => {
+        if (answer) {
+          this.IsBusy = true;
+
+          var ops = forkJoin(
+            ...this.SelectedItems.map((container) =>
+              this.containerService.KillContainer(container.id)
+            )
+          );
+
+          ops.subscribe((result) => {
+            result.forEach((item) => {
+              this.notification.success(item.message);
+            });
+            this.IsBusy = false;
+            this.LoadContainers();
+          });
+        }
       }
-
-      this.notification.HideLoading();
-    });
-  }
-
-  StopContainer(containerid: string): void {
-    this.notification.ShowLoading();
-    this.containerService.StopContainer(containerid).subscribe((result) => {
-      if (result.success) {
-        this.notification.success('Container Stop Success');
-        this.LoadContainers();
-      }
-      this.notification.HideLoading();
-    });
-  }
-
-  RemoveContainer(containerid: string): void {
-    this.notification.ShowLoading();
-
-    this.containerService.RemoveContainer(containerid).subscribe((result) => {
-      if (result.success) {
-        this.notification.success('Container Remove Success');
-        this.LoadContainers();
-      }
-
-      this.notification.HideLoading();
-    });
-  }
-
-  KillContainer(containerid: string): void {
-    this.notification.ShowLoading();
-
-    this.containerService.KillContainer(containerid).subscribe((result) => {
-      if (result.success) {
-        this.notification.success('Container Kill Success');
-        this.LoadContainers();
-      }
-
-      this.notification.HideLoading();
-    });
+    );
   }
 
   ShowLogs(containerid: string): void {
@@ -122,5 +161,51 @@ export class ContainersComponent implements OnInit {
 
   GetImageUir(imageName: string) {
     return '/Images/' + imageName;
+  }
+
+  IsButtonEnabled(button: string) {
+    if (this.SelectedItems.length === 0) return false;
+
+    switch (button) {
+      case 'start': {
+        var runningCount = this.SelectedItems.filter((p) => {
+          return p.state == 'running';
+        }).length;
+        return runningCount === 0;
+        break;
+      }
+      case 'stop':
+      case 'restart':
+      case 'kill': {
+        var runningCount = this.SelectedItems.filter((p) => {
+          return p.state == 'exited';
+        }).length;
+        return runningCount === 0;
+        break;
+      }
+    }
+  }
+
+  private Confirm(
+    message: string,
+    caption: string = 'Güncelle'
+  ): Promise<boolean> {
+    return new Promise<boolean>((resolve) => {
+      swal.fire({
+        title: caption,
+        icon: 'warning',
+        text: message,
+        showCloseButton: false,
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'Cancel',
+        preConfirm: () => {
+          return new Promise(async (res) => {
+            res(true);
+            resolve(true);
+          });
+        },
+      });
+    });
   }
 }

@@ -5,6 +5,7 @@ import {
   NotificationType,
 } from './services/notification.service';
 import Swal from 'sweetalert2';
+import * as Noty from 'noty';
 
 @Component({
   selector: 'app-root',
@@ -44,35 +45,29 @@ export class AppComponent implements OnInit {
   }
 
   private ShowSuccessToast(message: string) {
-    Swal.fire({
-      title: message,
-      position: 'top-end',
-      timer: 4000,
-      timerProgressBar: true,
-      toast: true,
-      icon: 'success',
-    });
+    new Noty({
+      text: message,
+      theme: 'metroui',
+      type: 'success',
+      timeout: 3000,
+    }).show();
   }
 
   private ShowWarningToast(message: string) {
-    Swal.fire({
-      title: message,
-      position: 'top-end',
-      timer: 4000,
-      timerProgressBar: true,
-      toast: true,
-      icon: 'warning',
-    });
+    new Noty({
+      text: message,
+      theme: 'metroui',
+      type: 'warning',
+      timeout: 3000,
+    }).show();
   }
 
   private ShowErrorToast(message: string) {
-    Swal.fire({
-      title: message,
-      position: 'top-end',
-      timer: 4000,
-      timerProgressBar: true,
-      toast: true,
-      icon: 'error',
-    });
+    new Noty({
+      text: message,
+      theme: 'metroui',
+      type: 'error',
+      timeout: 3000,
+    }).show();
   }
 }

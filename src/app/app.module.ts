@@ -14,9 +14,10 @@ import { ImagesComponent } from './images/images.component';
 import { ApploadingComponent } from './shared/apploading/apploading.component';
 import { ContainerlogsComponent } from './containerlogs/containerlogs.component';
 import { HomeComponent } from './home/home.component';
+import { VpnclientComponent } from './vpnclient/vpnclient.component';
 
 @NgModule({
-  declarations: [AppComponent, ContainersComponent, VolumesComponent, NetworksComponent, ImagesComponent, ApploadingComponent, ContainerlogsComponent, HomeComponent],
+  declarations: [AppComponent, ContainersComponent, VolumesComponent, NetworksComponent, ImagesComponent, ApploadingComponent, ContainerlogsComponent, HomeComponent, VpnclientComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

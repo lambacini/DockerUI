@@ -53,6 +53,12 @@ export class MenuService {
       Name: 'Images',
       Type: 'link',
       Icon: 'nvme'
+    }, {
+      Caption: 'VPN Clients',
+      Link: '/VPNClients',
+      Name: 'VPNClients',
+      Type: 'link',
+      Icon: 'nvme'
     });
 
     return this.MENU;

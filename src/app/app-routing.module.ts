@@ -6,6 +6,7 @@ import { NetworksComponent } from './networks/networks.component';
 import { ImagesComponent } from './images/images.component';
 import { ContainerlogsComponent } from './containerlogs/containerlogs.component';
 import { HomeComponent } from './home/home.component';
+import { VpnclientComponent } from './vpnclient/vpnclient.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/Home', pathMatch: 'full' },
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'Images',
     component: ImagesComponent,
+  },
+  {
+    path: 'VPNClients',
+    component: VpnclientComponent,
   },
 ];
 

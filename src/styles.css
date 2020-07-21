@@ -18,9 +18,9 @@ body {
   border-right: 1px solid #bdbcbc;
 }
 
-.main-container .content-container .content-area{
-  padding:0;
-  margin:5px;
+.main-container .content-container .content-area {
+  padding: 0;
+  margin: 5px;
 }
 
 .pageCard {
@@ -37,7 +37,6 @@ body {
 .datagrid {
   margin: 0px;
 }
-
 
 .swal2-modal {
   border-radius: 2px !important;
@@ -61,9 +60,13 @@ body {
   font-size: 12px !important;
 }
 
-
 .wrapText {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.noty_theme__metroui.noty_bar .noty_body {
+  padding: 1em;
+  font-size: 12px !important;
 }
