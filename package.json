@@ -25,6 +25,7 @@
     "@clr/icons": "^3.1.4",
     "@clr/ui": "^3.1.4",
     "@webcomponents/webcomponentsjs": "^2.0.0",
+    "ng-terminal": "^3.0.0-alpha",
     "noty": "^3.2.0-beta",
     "rxjs": "~6.5.4",
     "sweetalert2": "^9.17.0",

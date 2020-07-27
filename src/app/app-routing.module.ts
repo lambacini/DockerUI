@@ -7,6 +7,8 @@ import { ImagesComponent } from './images/images.component';
 import { ContainerlogsComponent } from './containerlogs/containerlogs.component';
 import { HomeComponent } from './home/home.component';
 import { VpnclientComponent } from './vpnclient/vpnclient.component';
+import { ContainerdetailComponent } from './containerdetail/containerdetail.component';
+import { TerminalComponent } from './terminal/terminal.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/Home', pathMatch: 'full' },
@@ -20,6 +22,14 @@ const routes: Routes = [
   },
   {
     path: 'Containers/:id',
+    component: ContainerdetailComponent,
+  },
+  {
+    path: 'Containers/Terminal/:id',
+    component: TerminalComponent,
+  },
+  {
+    path: 'Containers/Log/:id',
     component: ContainerlogsComponent,
   },
   {

@@ -1,8 +1,13 @@
-.row-align{
-    text-align: left;
+:host {
+  width: 100%;
+  height: 100%;
 }
 
-.table{
-    max-height: 500px !important;
-    overflow-y: scroll;
+.row-align {
+  text-align: left;
+}
+
+.table {
+  max-height: 500px !important;
+  overflow-y: scroll;
 }

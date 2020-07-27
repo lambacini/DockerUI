@@ -2,24 +2,42 @@
   <div fxLayout="row" class="pageCard">
     <clr-toggle-container>
       <clr-toggle-wrapper>
-        <input type="checkbox" clrToggle value="option1" name="options" />
+        <input
+          type="checkbox"
+          clrToggle
+          name="options"
+          [checked]="AutoRefresh"
+          (change)="ChangeAutoRefresh($event)"
+        />
         <label>Auto Refresh</label>
       </clr-toggle-wrapper>
     </clr-toggle-container>
   </div>
-  <div fxFlex fxFlexFill fxLayout="column" class="pageCard">
-    <table fxFlex fxFlexFill  style="position: relative;"class="table table-compact">
-      <thead>
-        <tr>
-          <th>Log</th>
-        </tr>
-      </thead>
+  <div
+    #scrollMe
+    [scrollTop]="scrollMe.scrollHeight"
+    fxFlex
+    fxFlexFill
+    fxLayout="column"
+    class="pageCard customscrollbar"
+    style="flex-direction: column-reverse !important; overflow-y: scroll;"
+  >
+    <textarea
+      readonly="true"
+      class="form-control"
+      style="border: 0; margin-left: 25px; height: 100%;"
+      #scrollMe2
+      [scrollTop]="scrollMe2.scrollHeight"
+      name="message"
+    >
+        {{ Log }}</textarea
+    >
+    <!-- <table style="margin: 0px;" class="table table-compact">
       <tbody>
         <tr *ngFor="let log of Logs">
-          <td class="row-align">{{log}}</td>
+          <td class="row-align">{{ log }}</td>
         </tr>
       </tbody>
-    </table>
-
+    </table> -->
   </div>
 </div>

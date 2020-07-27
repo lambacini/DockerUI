@@ -36,8 +36,10 @@ export class ContainersComponent implements OnInit {
         this.IsBusy = false;
       },
       (err) => {
+        if (err.error) {
+          this.notification.error(err.error.Message);
+        }
         this.IsBusy = false;
-        this.notification.warn('Api service not available !');
       }
     );
   }
@@ -115,13 +117,22 @@ export class ContainersComponent implements OnInit {
           )
         );
 
-        ops.subscribe((result) => {
-          result.forEach((item) => {
-            this.notification.success(item.message);
-          });
-          this.IsBusy = false;
-          this.LoadContainers();
-        });
+        ops.subscribe(
+          (result) => {
+            result.forEach((item) => {
+              console.log(item);
+              this.notification.success(item.message);
+            });
+            this.IsBusy = false;
+            this.LoadContainers();
+          },
+          (err) => {
+            if (err.error) {
+              this.notification.error(err.error.Message);
+            }
+            this.IsBusy = false;
+          }
+        );
       }
     });
   }
@@ -151,7 +162,7 @@ export class ContainersComponent implements OnInit {
   }
 
   ShowLogs(containerid: string): void {
-    this.router.navigate(['/Containers/', containerid]);
+    this.router.navigate(['/Containers/Log/', containerid]);
   }
 
   GetUri(port: any) {
@@ -184,6 +195,14 @@ export class ContainersComponent implements OnInit {
         break;
       }
     }
+  }
+
+  GetDetailUrl(containerid: string) {
+    this.router.navigate(['/Containers/', containerid]);
+  }
+
+  OpenTerminal(containerid: string) {
+    this.router.navigate(['/Containers/Terminal/', containerid]);
   }
 
   private Confirm(

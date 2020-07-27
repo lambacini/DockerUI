@@ -1,0 +1,14 @@
+<div fxFlex fxFlexFill fxLayout="column" style="position: relative;">
+  <div class="pageCard">
+    <button
+      style="margin-right: 2px;"
+      class="btn btn-sm"
+      (click)="Connect()"
+    >
+      Connect <clr-icon shape="refresh" size="12"></clr-icon>
+    </button>
+  </div>
+  <div fxFlex fxFlexFill fxLayout="column" class="pageCard">
+    <ng-terminal fxFlex fxFlexFill #term></ng-terminal>
+  </div>
+</div>

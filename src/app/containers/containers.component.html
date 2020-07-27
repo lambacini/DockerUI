@@ -1,9 +1,7 @@
 <div fxFlex fxFlexFill fxLayout="column" style="position: relative;">
   <div class="pageCard">
     <div *ngIf="IsBusy" class="card-footer">
-      <div aria-hidden="true" style="padding: 5px;" class="progress loop">
-        
-      </div>
+      <div aria-hidden="true" style="padding: 5px;" class="progress loop"></div>
     </div>
     <button
       style="margin-right: 2px;"
@@ -62,9 +60,10 @@
       style="height: 100% !important;"
       class="datagrid"
     >
+      <!-- <clr-dg-column>ID</clr-dg-column> -->
       <clr-dg-column style="width: 75px;"></clr-dg-column>
-      <clr-dg-column>ID</clr-dg-column>
       <clr-dg-column>Name</clr-dg-column>
+      <clr-dg-column style="width: 75px;"></clr-dg-column>
       <clr-dg-column>Image</clr-dg-column>
       <clr-dg-column>Ports</clr-dg-column>
       <clr-dg-column>Status</clr-dg-column>
@@ -74,6 +73,19 @@
         *clrDgItems="let container of Containers"
         [clrDgItem]="container"
       >
+        <clr-dg-cell style="padding: 8px;">
+          <span class="icon_container">
+            <clr-icon (click)="ShowLogs(container.id)" shape="view-list" class="is-solid icon-button"></clr-icon>
+            <clr-icon (click)="OpenTerminal(container.id)" shape="terminal" class="is-solid icon-button"></clr-icon>
+            <clr-icon shape="radar"  class="is-solid icon-button"></clr-icon>
+          </span>
+        </clr-dg-cell>
+        <!-- <clr-dg-cell>{{ container.id | slice: 0:10 }}</clr-dg-cell> -->
+        <clr-dg-cell>
+          <a class="linkbutton" (click)="GetDetailUrl(container.id)">
+            {{ container.names[0] | slice: 1:100 }}
+          </a>
+        </clr-dg-cell>
         <clr-dg-cell style="padding: 8px;">
           <span
             *ngIf="container.state == 'running'"
@@ -86,8 +98,6 @@
             >{{ container.state }}</span
           >
         </clr-dg-cell>
-        <clr-dg-cell>{{ container.id | slice: 0:10 }}</clr-dg-cell>
-        <clr-dg-cell>{{ container.names[0] | slice: 1:100 }}</clr-dg-cell>
         <clr-dg-cell class="wrapText">
           <a [attr.href]="GetImageUir(container.image)" target="_blank">
             {{ container.image }}

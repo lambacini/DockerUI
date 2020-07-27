@@ -1,5 +1,19 @@
 :host {
-    width: 100%;
-    height: 100%;
-  }
-  
+  width: 100%;
+  height: 100%;
+}
+
+.linkbutton {
+  cursor: pointer;
+  color: #0072a3;
+}
+
+.icon_container {
+  padding: 4px;
+  color: #5a6c75;
+}
+
+.icon-button {
+  margin: 2px;
+  cursor:pointer;
+}

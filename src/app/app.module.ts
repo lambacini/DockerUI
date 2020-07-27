@@ -15,16 +15,20 @@ import { ApploadingComponent } from './shared/apploading/apploading.component';
 import { ContainerlogsComponent } from './containerlogs/containerlogs.component';
 import { HomeComponent } from './home/home.component';
 import { VpnclientComponent } from './vpnclient/vpnclient.component';
+import { ContainerdetailComponent } from './containerdetail/containerdetail.component';
+import { TerminalComponent } from './terminal/terminal.component';
+import { NgTerminalModule } from 'ng-terminal';
 
 @NgModule({
-  declarations: [AppComponent, ContainersComponent, VolumesComponent, NetworksComponent, ImagesComponent, ApploadingComponent, ContainerlogsComponent, HomeComponent, VpnclientComponent],
+  declarations: [AppComponent, ContainersComponent, VolumesComponent, NetworksComponent, ImagesComponent, ApploadingComponent, ContainerlogsComponent, HomeComponent, VpnclientComponent, ContainerdetailComponent, TerminalComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     ClarityModule,
     AppRoutingModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    NgTerminalModule
   ],
   providers: [],
   bootstrap: [AppComponent],

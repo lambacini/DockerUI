@@ -13,6 +13,10 @@ body {
   outline: none !important;
 }
 
+.clr-form-control {
+  margin: 0px;
+}
+
 .main-container .content-container .clr-vertical-nav,
 .main-container .content-container .sidenav {
   border-right: 1px solid #bdbcbc;
@@ -69,4 +73,46 @@ body {
 .noty_theme__metroui.noty_bar .noty_body {
   padding: 1em;
   font-size: 12px !important;
+}
+.xterm {
+  height: 100%;
+}
+
+/* Scrollbar */
+
+.customscrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+.customscrollbar::-webkit-scrollbar-button {
+  /*width: 4px;
+    height: 2px;*/
+}
+
+.customscrollbar::-webkit-scrollbar-thumb {
+  background: #b1b1b1;
+  border-radius: 1px;
+}
+
+.customscrollbar::-webkit-scrollbar-thumb:hover {
+  background: #676666;
+}
+
+.customscrollbar::-webkit-scrollbar-thumb:active {
+  background: #616161;
+}
+
+.customscrollbar::-webkit-scrollbar-track {
+  background: #333131;
+  border-radius: 1px;
+}
+
+.customscrollbar::-webkit-scrollbar-track {
+  background: #ffffff !important;
+  border-radius: 1px;
+}
+
+.customscrollbar::-webkit-scrollbar-corner {
+  background: transparent;
 }
