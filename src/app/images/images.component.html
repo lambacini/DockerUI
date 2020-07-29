@@ -1,43 +1,18 @@
 <div fxFlex fxFlexFill fxLayout="column" style="position: relative;">
   <div class="pageCard">
-    <button
-      style="margin-right: 2px;"
-      class="btn btn-sm"
-      (click)="LoadImages()"
-    >
+    <button style="margin-right: 2px;" class="btn btn-sm" (click)="LoadImages()">
       Refresh <clr-icon shape="refresh" size="12"></clr-icon>
     </button>
-    <button
-      style="margin-right: 2px;"
-      class="btn btn-primary btn-sm"
-      (click)="LoadImages()"
-    >
+    <button style="margin-right: 2px;" class="btn btn-primary btn-sm" (click)="searchimage.open()">
       Search <clr-icon shape="filter" size="12"></clr-icon>
     </button>
 
-    <button
-      style="margin-right: 2px;"
-      class="btn btn-primary btn-sm"
-      (click)="LoadImages()"
-    >
-      Pull <clr-icon shape="download" size="12"></clr-icon>
-    </button>
-
-    <button
-      style="margin-right: 2px;"
-      class="btn btn-primary btn-sm"
-      (click)="LoadImages()"
-    >
+    <button [disabled]="SelectedItems.length === 0" style="margin-right: 2px;" class="btn btn-primary btn-sm" (click)="LoadImages()">
       Push <clr-icon shape="upload" size="12"></clr-icon>
     </button>
 
     <clr-dropdown>
-      <button
-        [disabled]="SelectedItems.length === 0"
-        [clrDisabled]="true"
-        class="btn btn-danger btn-sm"
-        clrDropdownTrigger
-      >
+      <button [disabled]="SelectedItems.length === 0" class="btn btn-danger btn-sm" clrDropdownTrigger>
         Remove
         <clr-icon shape="caret down"></clr-icon>
       </button>
@@ -46,24 +21,15 @@
         <div aria-label="Remove" clrDropdownItem (click)="RemoveImage(false)">
           Remove
         </div>
-        <div
-          aria-label="Force Remove"
-          clrDropdownItem
-          (click)="RemoveImage(true)"
-        >
+        <div aria-label="Force Remove" clrDropdownItem (click)="RemoveImage(true)">
           Force Remove
         </div>
       </clr-dropdown-menu>
     </clr-dropdown>
   </div>
   <div fxFlex>
-    <clr-datagrid
-      #dataGrid
-      fxFlex
-      [clrDgLoading]="IsBusy"
-      [(clrDgSelected)]="SelectedItems"
-      (clrDgRefresh)="LoadImages()"
-    >
+    <clr-datagrid #dataGrid fxFlex [clrDgLoading]="IsBusy" [(clrDgSelected)]="SelectedItems"
+      (clrDgRefresh)="LoadImages()">
       <clr-dg-column style="width: 240px;">ID</clr-dg-column>
       <clr-dg-column>Tag</clr-dg-column>
       <clr-dg-column>Size</clr-dg-column>
@@ -76,19 +42,14 @@
             <span class="label label-blue">{{ tag }}</span>
           </ng-template>
         </clr-dg-cell>
-        <clr-dg-cell class="wrapText"
-          >{{ image.size / 1024 / 1024 | number: "1.0-2" }} MB</clr-dg-cell
-        >
-        <clr-dg-cell class="wrapText"
-          >{{ image.created | date: "yyyy/MM/dd" }}
+        <clr-dg-cell class="wrapText">{{ image.size / 1024 / 1024 | number: "1.0-2" }} MB</clr-dg-cell>
+        <clr-dg-cell class="wrapText">{{ image.created | date: "yyyy/MM/dd" }}
         </clr-dg-cell>
       </clr-dg-row>
 
       <clr-dg-footer>
         <clr-dg-pagination #pagination [clrDgPageSize]="20">
-          <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]"
-            >Images per page</clr-dg-page-size
-          >
+          <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">Images per page</clr-dg-page-size>
           {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of
           {{ pagination.totalItems }} Images
         </clr-dg-pagination>
@@ -96,3 +57,11 @@
     </clr-datagrid>
   </div>
 </div>
+
+<clr-modal #searchimage [clrModalSize]="'xl'" [clrModalStaticBackdrop]="true">
+  <div class="modal-body" >
+    <div fxLayout="column" style="height: 520px !important;">
+      <app-search></app-search>
+    </div>
+  </div>
+</clr-modal>

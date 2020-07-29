@@ -13,6 +13,17 @@ export class ImageService extends ServiceBase<any> {
     super(context, http);
     this.ApiSegment = 'api/Image';
   }
+  
+  SearchImage(searchTerm:string){
+    return this.http
+    .get(
+      this.context.ApiUrl(this.ApiSegment) +
+          '/Search?name=' +
+          searchTerm
+    ).pipe((result)=>{
+      return result as Observable<ApiResponse<any>>;
+    })
+  }
 
   RemoveImage(imageName: string, force: boolean): Observable<ApiResponse<any>> {
     return this.http

@@ -18,11 +18,14 @@ import { VpnclientComponent } from './vpnclient/vpnclient.component';
 import { ContainerdetailComponent } from './containerdetail/containerdetail.component';
 import { TerminalComponent } from './terminal/terminal.component';
 import { NgTerminalModule } from 'ng-terminal';
+import { SearchComponent } from './search/search.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, ContainersComponent, VolumesComponent, NetworksComponent, ImagesComponent, ApploadingComponent, ContainerlogsComponent, HomeComponent, VpnclientComponent, ContainerdetailComponent, TerminalComponent],
+  declarations: [AppComponent, ContainersComponent, VolumesComponent, NetworksComponent, ImagesComponent, ApploadingComponent, ContainerlogsComponent, HomeComponent, VpnclientComponent, ContainerdetailComponent, TerminalComponent, SearchComponent],
   imports: [
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     ClarityModule,
     AppRoutingModule,

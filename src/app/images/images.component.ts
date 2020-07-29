@@ -18,6 +18,7 @@ export class ImagesComponent implements OnInit {
   public SelectedItem: any;
   public IsBusy: boolean = false;
 
+
   constructor(
     private context: AppContext,
     private imageService: ImageService,

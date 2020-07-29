@@ -34,25 +34,25 @@ export class MenuService {
       Link: '/Containers',
       Name: 'Containers',
       Type: 'link',
-      Icon: 'view-cards'
+      Icon: 'container'
     }, {
       Caption: 'Volumes',
       Link: '/Volumes',
       Name: 'Volumes',
       Type: 'link',
-      Icon: 'nvme'
+      Icon: 'container-volume'
     }, {
       Caption: 'Networks',
       Link: '/Networks',
       Name: 'Networks',
       Type: 'link',
-      Icon: 'nvme'
+      Icon: 'network-globe'
     }, {
       Caption: 'Images',
       Link: '/Images',
       Name: 'Images',
       Type: 'link',
-      Icon: 'nvme'
+      Icon: 'control-lun'
     }, {
       Caption: 'VPN Clients',
       Link: '/VPNClients',
