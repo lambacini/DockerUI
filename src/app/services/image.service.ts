@@ -13,4 +13,19 @@ export class ImageService extends ServiceBase<any> {
     super(context, http);
     this.ApiSegment = 'api/Image';
   }
+
+  RemoveImage(imageName: string, force: boolean): Observable<ApiResponse<any>> {
+    return this.http
+      .post(
+        this.context.ApiUrl(this.ApiSegment) +
+          '/Remove?name=' +
+          imageName +
+          '&force=' +
+          force,
+        {}
+      )
+      .pipe((result) => {
+        return result as Observable<ApiResponse<any>>;
+      });
+  }
 }
