@@ -10,7 +10,7 @@
         <clr-datagrid [(clrDgSelected)]="SelectedImages" #dataGrid style="height: 420px;;" [clrDgLoading]="IsBusy">
             <clr-dg-action-bar>
                 <div class="btn-group">
-                    <button *ngIf="SelectedImages.length===1" type="button" class="btn btn-sm btn-secondary">
+                    <button [clrLoading]="PullButtonState" *ngIf="SelectedImages.length===1" type="button" (click)="PullImage()" class="btn btn-sm btn-secondary">
                         <clr-icon shape="download"></clr-icon> Pull
                     </button>
                 </div>

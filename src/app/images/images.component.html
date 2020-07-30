@@ -1,6 +1,6 @@
 <div fxFlex fxFlexFill fxLayout="column" style="position: relative;">
   <div class="pageCard">
-    <button style="margin-right: 2px;" class="btn btn-sm" (click)="LoadImages()">
+    <button [clrLoading]="LoadButtonState" style="margin-right: 2px;" class="btn btn-sm" (click)="LoadImages()">
       Refresh <clr-icon shape="refresh" size="12"></clr-icon>
     </button>
     <button style="margin-right: 2px;" class="btn btn-primary btn-sm" (click)="searchimage.open()">
