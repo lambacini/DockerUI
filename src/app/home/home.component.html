@@ -1,0 +1,33 @@
+<div
+  fxLayoutGap="10px"
+  fxLayout="column"
+  fxFlex
+  fxFill
+  style="border: 1px solid gray; padding: 5px;"
+>
+  <div fxFlex="25" style="border: 1px solid gray;">
+    a
+  </div>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="5px" style="border: 1px solid gray;">
+    <app-infocard
+      [Count]="10"
+      [Info]="'Volume'"
+      [IconName]="'Container'"
+    ></app-infocard>
+    <app-infocard
+      [Count]="10"
+      [Info]="'Volume'"
+      [IconName]="'Container'"
+    ></app-infocard>
+    <app-infocard
+      [Count]="10"
+      [Info]="'Volume'"
+      [IconName]="'Container'"
+    ></app-infocard>
+    <app-infocard
+      [Count]="10"
+      [Info]="'Volume'"
+      [IconName]="'Container'"
+    ></app-infocard>
+  </div>
+</div>

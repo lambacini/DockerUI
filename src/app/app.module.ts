@@ -20,9 +20,10 @@ import { TerminalComponent } from './terminal/terminal.component';
 import { NgTerminalModule } from 'ng-terminal';
 import { SearchComponent } from './search/search.component';
 import { FormsModule } from '@angular/forms';
+import { InfocardComponent } from './infocard/infocard.component';
 
 @NgModule({
-  declarations: [AppComponent, ContainersComponent, VolumesComponent, NetworksComponent, ImagesComponent, ApploadingComponent, ContainerlogsComponent, HomeComponent, VpnclientComponent, ContainerdetailComponent, TerminalComponent, SearchComponent],
+  declarations: [AppComponent, ContainersComponent, VolumesComponent, NetworksComponent, ImagesComponent, ApploadingComponent, ContainerlogsComponent, HomeComponent, VpnclientComponent, ContainerdetailComponent, TerminalComponent, SearchComponent, InfocardComponent],
   imports: [
     BrowserModule,
     FormsModule,
